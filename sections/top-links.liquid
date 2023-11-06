@@ -1,1 +1,33 @@
-<div>Top links</div>
+{%- if section.blocks.size > 0 -%}
+  <ul>
+    {%- for block in section.blocks -%}
+      <li>
+        <a href="{{ block.settings.url }}">{{ block.settings.text }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Top links",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "name": "Link",
+      "type": "link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,12 +1,32 @@
 {
   "name": "t:sections.header.name",
-  "type": "header",
+  "type": "custom.top_group",
   "sections": {
     "top-info": {
       "type": "top-info"
     },
     "top-links": {
-      "type": "top-links"
+      "type": "top-links",
+      "blocks": {
+        "link-0": {
+          "type": "link",
+          "settings": {
+            "text": "Contact us",
+            "url": "/#"
+          }
+        },
+        "link-1": {
+          "type": "link",
+          "settings": {
+            "text": "Our shops",
+            "url": "/#"
+          }
+        }
+      },
+      "block_order": [
+        "link-0",
+        "link-1"
+      ]
     }
   },
   "order": [

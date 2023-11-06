@@ -1,1 +1,14 @@
-<div>Top info</div>
+<div>{{ section.settings.text }}</div>
+{% schema %}
+{
+  "name": "Top info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Here you can place an announcement!"
+    }
+  ]
+}
+{% endschema %}
