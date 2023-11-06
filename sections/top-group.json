@@ -1,0 +1,16 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "top-info": {
+      "type": "top-info"
+    },
+    "top-links": {
+      "type": "top-links"
+    }
+  },
+  "order": [
+    "top-info",
+    "top-links"
+  ]
+}
