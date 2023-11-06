@@ -6,3 +6,16 @@
     <div>{% render 'top-cart' %}</div>
   </div>
 </div>
+{% schema %}
+{
+  "name": "Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "navigation",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    }
+  ]
+}
+{% endschema %}

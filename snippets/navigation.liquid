@@ -1,1 +1,10 @@
-<div>Navigation</div>
+{%- if section.settings.navigation.links.size > 0 -%}
+  <ul>
+    {%- for link in section.settings.navigation.links -%}
+      <li>
+        <a href="{{ link.url }}">{{ link.title | escape }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+<ul></ul>

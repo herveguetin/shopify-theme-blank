@@ -1,1 +1,41 @@
-<div>Top search</div>
+<div x-data="topSearch">
+  <input type="text" placeholder="Your search" x-model="q" x-on:input.change.debounce="query()">
+  <div x-show="products.length === 0 && canShowNoResults">No result found</div>
+  <div x-show="products.length > 0">
+    <ul>
+      <template x-for="product in products">
+        <li>
+          <a :href="product.url"><span x-text="product.title"></span></a>
+        </li>
+      </template>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('topSearch', () => {
+      const MIN_QUERY_LENGTH = 3;
+
+      return {
+        q: '',
+        results: {},
+        canShowNoResults: false,
+        get products() {
+          return this.results.resources ? this.results.resources.results.products : [];
+        },
+        query() {
+          if (this.q.length > MIN_QUERY_LENGTH) {
+            this.canShowNoResults = false;
+            fetch(window.Shopify.routes.root + 'search/suggest.json?q=' + this.q)
+              .then((response) => response.json())
+              .then((suggestions) => {
+                this.results = suggestions;
+                this.canShowNoResults = true;
+              });
+          }
+        },
+      };
+    });
+  });
+</script>

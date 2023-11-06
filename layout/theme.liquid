@@ -1,6 +1,5 @@
-{% assign content_for_header = '' %}
-{{ content_for_header }}
 <!doctype html>
+
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
@@ -19,11 +18,12 @@
 
     {% render 'meta-tags' %}
 
+    {{ content_for_header }}
+
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    <link rel="manifest" href="site.webmanifest">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <meta name="theme-color" content="#fafafa">
   </head>
