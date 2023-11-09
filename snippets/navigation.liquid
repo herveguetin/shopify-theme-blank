@@ -1,10 +1,68 @@
 {%- if section.settings.navigation.links.size > 0 -%}
-  <ul class="flex gap-x-14 justify-center text-white uppercase mt-2 font-josefin">
-    {%- for link in section.settings.navigation.links -%}
-      <li>
-        <a href="{{ link.url }}">{{ link.title | escape }}</a>
-      </li>
-    {%- endfor -%}
-  </ul>
+  <nav x-data="{ activeIndex: 'none' }" x-cloak>
+    <ul
+      @mouseover.away="activeIndex = 'none'"
+      class="relative flex gap-x-8 justify-center text-white uppercase mt-2 font-josefin text-sm"
+    >
+      {%- for link0 in section.settings.navigation.links -%}
+        <li>
+          <a
+            @mouseover="activeIndex = '{{ link0.handle }}'"
+            href="#"
+            class="block relative pb-2"
+          >
+            {{- link0.title | escape -}}
+            <span
+              x-show="activeIndex === '{{ link0.handle }}'"
+              class="absolute -bottom-2.5 left-0 w-full text-center"
+              >&#9650;</span
+            >
+          </a>
+          <ul
+            x-show="activeIndex === '{{ link0.handle }}'"
+            class="absolute gradient left-0 w-full flex justify-evenly px-24 py-10 bg-white text-stone-700"
+          >
+            {%- for link1 in link0.links -%}
+              <li class="w-1/4">
+                <div class="mb-8">{{ link1.title }}</div>
+                {% liquid
+                  if link1.object.metafields.custom.thumbnail
+                    assign link1_image = link1.object.metafields.custom.thumbnail
+                  elsif link1.object.image
+                    assign link1_image = link1.object.image
+                  else
+                    assign link1_image = false
+                  endif
+                %}
+                {%- if link1_image -%}
+                  <div class="w-80 h-48 mb-8 overflow-hidden">
+                    <img
+                      src="{{ link1_image | image_url: width: 400 }}"
+                      class="w-full h-full object-cover border border-stone-300"
+                      width="200"
+                      height="150"
+                      alt=""
+                      loading="lazy"
+                    >
+                  </div>
+                {%- endif -%}
+                <ul class="flex flex-col gap-4 normal-case font-josefinlight text-base">
+                  {%- for link2 in link1.links -%}
+                    <li>
+                      <a href="{{ link2.url }}">{{ link2.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                  {%- for product in link1.object.products -%}
+                    <li>
+                      <a href="{{ product.url }}">{{ product.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
 {%- endif -%}
-<ul></ul>
