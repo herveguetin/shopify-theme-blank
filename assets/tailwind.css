@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Euphoria";
-    src: url("./EuphoriaScript-Regular.ttf") format("TrueType");
+    font-family: "Josefin";
+    src: url("./JosefinSans-Medium.ttf") format("TrueType");
   }

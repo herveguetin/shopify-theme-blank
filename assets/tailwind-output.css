@@ -639,12 +639,20 @@ video {
   inset-inline-end: 0.25rem;
 }
 
+.top-0 {
+  top: 0px;
+}
+
 .isolate {
   isolation: isolate;
 }
 
 .isolation-auto {
   isolation: auto;
+}
+
+.-z-50 {
+  z-index: -50;
 }
 
 .float-right {
@@ -673,6 +681,16 @@ video {
 
 .clear-none {
   clear: none;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mt-2 {
@@ -776,6 +794,22 @@ video {
 
 .hidden {
   display: none;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
+.w-32 {
+  width: 8rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .flex-shrink {
@@ -1290,6 +1324,26 @@ video {
   justify-items: stretch;
 }
 
+.gap-x-5 {
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem;
+}
+
+.gap-x-20 {
+  -moz-column-gap: 5rem;
+       column-gap: 5rem;
+}
+
+.gap-x-16 {
+  -moz-column-gap: 4rem;
+       column-gap: 4rem;
+}
+
+.gap-x-14 {
+  -moz-column-gap: 3.5rem;
+       column-gap: 3.5rem;
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -1590,6 +1644,10 @@ video {
   border-radius: 0.25rem;
 }
 
+.rounded-full {
+  border-radius: 9999px;
+}
+
 .rounded-b {
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
@@ -1719,6 +1777,11 @@ video {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -1829,6 +1892,10 @@ video {
      object-fit: scale-down;
 }
 
+.pr-40 {
+  padding-right: 10rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1885,8 +1952,8 @@ video {
   vertical-align: super;
 }
 
-.font-euphoria {
-  font-family: Euphoria, cursive;
+.font-josefin {
+  font-family: Josefin, sans-serif;
 }
 
 .font-bold {
@@ -1968,6 +2035,11 @@ video {
 .text-lime-900 {
   --tw-text-opacity: 1;
   color: rgb(54 83 20 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2288,9 +2360,9 @@ video {
 }
 
 @font-face {
-  font-family: "Euphoria";
+  font-family: "Josefin";
 
-  src: url("./EuphoriaScript-Regular.ttf") format("TrueType");
+  src: url("./JosefinSans-Medium.ttf") format("TrueType");
 }
 
 @media (min-width: 640px) {

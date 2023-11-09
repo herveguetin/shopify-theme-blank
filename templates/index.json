@@ -1,10 +1,14 @@
 {
   "sections": {
+    "top-hero": {
+      "type": "hero"
+    },
     "demo": {
       "type": "alpine-tailwind-demo"
     }
   },
   "order": [
+    "top-hero",
     "demo"
   ]
 }

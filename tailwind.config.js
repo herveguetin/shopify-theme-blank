@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        euphoria: ['Euphoria', 'cursive']
+        josefin: ['Josefin', 'sans-serif']
       }
     },
   },

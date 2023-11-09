@@ -1,5 +1,5 @@
 {%- if section.settings.navigation.links.size > 0 -%}
-  <ul>
+  <ul class="flex gap-x-14 justify-center text-white uppercase mt-2 font-josefin">
     {%- for link in section.settings.navigation.links -%}
       <li>
         <a href="{{ link.url }}">{{ link.title | escape }}</a>
