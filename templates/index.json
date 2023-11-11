@@ -3,12 +3,48 @@
     "top-hero": {
       "type": "hero"
     },
+    "banners": {
+      "type": "banners",
+      "blocks": {
+        "banner-0": {
+          "type": "banner",
+          "settings": {
+            "title": "Portes ouvertes les 16 et 17 décembre 2023",
+            "description": "Rejoignez-nous pour une journée portes ouvertes. Visitez nos caves voutées, découvrez la méthode traditionelle et partagez des moments effervescents. Venez vivre l'expérience enchanteresse de la Côte Roannaise.",
+            "url": ""
+          }
+        },
+        "banner-1": {
+          "type": "banner",
+          "settings": {
+            "title": "La visite des caves",
+            "description": "Nous vous invitons chaleureusement à plonger dans l'atmosphère unique de notre cave voûtée. Découvrez l'histoire de nos vins, dégustez des saveurs authentiques et partagez des moments conviviaux au cœur de notre terroir.",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "banner-0",
+        "banner-1"
+      ]
+    },
+    "featured": {
+      "type": "featured",
+      "settings": {
+        "title": "Cuvées spéciales et millésimées",
+        "top_tag": "À découvrir",
+        "description": "Pour vos soirées festives et occasions spéciales, cette sélection vous surprendra.",
+        "collection": "featured"
+      }
+    },
     "demo": {
       "type": "alpine-tailwind-demo"
     }
   },
   "order": [
     "top-hero",
+    "banners",
+    "featured",
     "demo"
   ]
 }

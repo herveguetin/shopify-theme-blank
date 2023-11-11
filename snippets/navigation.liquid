@@ -1,5 +1,5 @@
 {%- if section.settings.navigation.links.size > 0 -%}
-  <nav x-data="{ activeIndex: 'none' }" x-cloak>
+  <nav x-data="{ activeIndex: 'none' }" x-cloak class="relative z-50">
     <ul
       @mouseover.away="activeIndex = 'none'"
       class="relative flex gap-x-8 justify-center text-white uppercase mt-2 font-josefin text-sm"
@@ -20,7 +20,7 @@
           </a>
           <ul
             x-show="activeIndex === '{{ link0.handle }}'"
-            class="absolute gradient left-0 w-full flex justify-evenly px-24 py-10 bg-white text-stone-700"
+            class="absolute left-0 w-full flex justify-evenly px-24 py-10 bg-white text-stone-700"
           >
             {%- for link1 in link0.links -%}
               <li class="w-1/4">
@@ -47,16 +47,44 @@
                   </div>
                 {%- endif -%}
                 <ul class="flex flex-col gap-4 normal-case font-josefinlight text-base">
-                  {%- for link2 in link1.links -%}
+                  {% liquid
+                    assign type = 'collection'
+                    assign link1_resources = link1.object.products
+                    if link1_resources == null
+                      assign type = 'pages'
+                      assign link1_resources = link1.links
+                    endif
+                    if link1_resources[0] == null
+                      assign type = 'free'
+                    endif
+                  %}
+                  {%- for link2 in link1_resources -%}
                     <li>
-                      <a href="{{ link2.url }}">{{ link2.title }}</a>
+                      <a class="block transform transition duration-200 hover:translate-x-1" href="{{ link2.url }}">
+                        {{- link2.title -}}
+                      </a>
                     </li>
                   {%- endfor -%}
-                  {%- for product in link1.object.products -%}
-                    <li>
-                      <a href="{{ product.url }}">{{ product.title }}</a>
-                    </li>
-                  {%- endfor -%}
+                  {%- if type == 'collection' -%}
+                    <a href="{{ link1.url }}">
+                      <span class="flex block transform transition duration-200 hover:translate-x-1 font-josefin">
+                        Liste détaillée
+                        {%- render 'i-arrow-right' -%}
+                      </span>
+                    </a>
+                  {%- endif -%}
+                  {%- if type == 'free' -%}
+                    <p>
+                      L'ensemble de notre production est en vente sur ce site. Si toutefois vous préférez passer votre
+                      commande sur papier, merci de télécharger le bon de commande ci-dessous.
+                    </p>
+                    <a href="#">
+                      <span class="flex block transform transition duration-200 hover:translate-x-1 font-josefin">
+                        Télécharger le bon de commande
+                        {%- render 'i-arrow-right' -%}
+                      </span>
+                    </a>
+                  {%- endif -%}
                 </ul>
               </li>
             {%- endfor -%}

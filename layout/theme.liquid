@@ -10,7 +10,6 @@
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
-    {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
     <link rel="canonical" href="{{ canonical_url }}">
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
@@ -25,10 +24,16 @@
     {%- endif -%}
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
+
     <meta name="theme-color" content="#fafafa">
   </head>
 
-  <body class="text-stone-700">
+  <body class="bg-stone-50 text-stone-700 font-josefinlight">
     {% sections 'top-group' %}
     {% section 'menu' %}
     {{ content_for_layout }}

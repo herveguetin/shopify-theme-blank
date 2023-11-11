@@ -1,0 +1,71 @@
+<div x-data="carousel" class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide self-center">
+      <div class="mr-4 flex flex-col gap-20  pr-8">
+        <div class="font-bodoni uppercase text-sm text-stone-500 tracking-widest">{{ top_tag }}</div>
+        <div class="font-bodoni text-4xl leading-normal">{{ title }}</div>
+        <div>{{ description }}</div>
+        <div>{% render 'b-dark', text: 'En savoir plus', url: '#' %}</div>
+      </div>
+    </div>
+    {%- for item in items -%}
+      {%- liquid
+        assign descriptionArray = item.description | split: '.'
+      -%}
+      <div class="swiper-slide bg-white border border-stone-200">
+        <img src="{{ item.featured_image | image_url }}" alt="" style="mix-blend-mode: hard-light;">
+        <div class="p-6 bg-stone-100">
+          <div class="font-bodoni text-lg mb-4">{{ item.title }}</div>
+          <div>{{ descriptionArray[0] }}</div>
+          <div class="flex items-center mt-6 justify-between">
+            <div class="font-bodoni text-xl">{{ item.price | money }}</div>
+            <div class="border rounded-full border-stone-700 w-fit p-2">{% render 'b-cart', product: item %}</div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="swiper-button-prev" x-ref="btn_prev">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+  </div>
+  <div class="swiper-button-next" x-ref="btn_next">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+    </svg>
+  </div>
+</div>
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('carousel', () => {
+      return {
+        init() {
+          new Swiper(this.$el, {
+            navigation: {
+              nextEl: this.$refs.btn_next,
+              prevEl: this.$refs.btn_prev,
+            },
+            slidesPerView: 4,
+            spaceBetween: 20,
+          });
+        },
+      };
+    });
+  });
+</script>

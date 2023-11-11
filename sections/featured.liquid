@@ -1,0 +1,38 @@
+<div class="_contained mt-28">
+  {% render 'carousel',
+    items: section.settings.collection.products,
+    title: section.settings.title,
+    top_tag: section.settings.top_tag,
+    description: section.settings.description
+  %}
+</div>
+{% schema %}
+{
+  "name": "Featured",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured products",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "top_tag",
+      "default": "Discover",
+      "label": "Top tag"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "The description of the featured block.",
+      "label": "Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ]
+}
+{% endschema %}

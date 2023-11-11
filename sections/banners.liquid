@@ -1,0 +1,55 @@
+{%- for block in section.blocks -%}
+  <div class="relative flex flex-col min-h-[45rem] items-center justify-center gap-16 overflow-hidden">
+    {%- if forloop.index > 1 -%}
+      <div class="absolute -z-10 top-0 w-full">
+        {%- liquid
+          assign image_url = block.image | image_url
+          if image_url == null
+            assign image_url = 'caves.jpg' | asset_url
+          endif
+        -%}
+        <img class="w-full" src="{{ image_url }}" alt="">
+      </div>
+    {%- endif -%}
+    <div class="w-2/3 text-center font-bodoni uppercase text-6xl text-white">{{ block.settings.title }}</div>
+    <div class="w-1/2 text-white font-josefin uppercase text-justify leading-10">{{ block.settings.description }}</div>
+    {% render 'b-white', text: 'En savoir plus', url: block.settings.url %}
+  </div>
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Banners",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Bienvenue chez J.-B. Clair",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "default": "Bienvenue dans notre cave en ligne. Découvrez un univers où chaque bouteille raconte une histoire unique. Parcourez notre sélection soigneusement élaborée de vins fins et trouvez le compagnon idéal pour vos moments spéciaux. Laissez-vous envoûter par la diversité de nos cépages et éveillez vos sens à une expérience gustative exceptionnelle. Bonne dégustation.",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -11,12 +11,13 @@ module.exports = {
       white: colors.white,
       stone: colors.stone,
       red: colors.red,
-      lime: colors.lime
+      amber: colors.amber
     },
     extend: {
       fontFamily: {
         josefin: ['Josefin', 'sans-serif'],
-        josefinlight: ['JosefinLight', 'sans-serif']
+        josefinlight: ['JosefinLight', 'sans-serif'],
+        bodoni: ['Bodoni', 'serif'],
       }
     },
   },
