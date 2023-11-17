@@ -23,6 +23,7 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -37,5 +38,11 @@
     {% sections 'top-group' %}
     {% section 'menu' %}
     {{ content_for_layout }}
+    <div class="bg-stone-900 text-white relative mt-20 pt-10 _clearfix">
+      <div class="_contained">
+        {% sections 'footer-group' %}
+      </div>
+    </div>
+    {% render 'alpine-scripts' %}
   </body>
 </html>

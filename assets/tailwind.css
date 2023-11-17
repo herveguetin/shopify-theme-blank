@@ -34,6 +34,12 @@
     background: linear-gradient(0deg, rgba(0,0,0,0) 78%, rgba(0,0,0,0.4) 93%);
   }
 
+  ._clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
   /** Swiper */
   .swiper-button-next, .swiper-button-prev {
     color: inherit;

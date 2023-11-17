@@ -36,15 +36,11 @@
         "description": "Pour vos soirées festives et occasions spéciales, cette sélection vous surprendra.",
         "collection": "featured"
       }
-    },
-    "demo": {
-      "type": "alpine-tailwind-demo"
     }
   },
   "order": [
     "top-hero",
     "banners",
-    "featured",
-    "demo"
+    "featured"
   ]
 }
