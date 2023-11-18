@@ -1,15 +1,17 @@
-<div class="w-3/4 float-left flex">
+<div class="w-2/3 float-left flex gap-20">
   {%- for block in section.blocks -%}
-    <div>
-      <h6>{{ block.settings.heading }}</h6>
-      <ul>
-        {%- for link in block.settings.menu.links -%}
-          <li>
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </div>
+    {%- for link0 in block.settings.menu.links -%}
+      <div>
+        <h6 class="pb-6 font-josefin uppercase text-sm">{{ link0.title }}</h6>
+        <ul>
+          {%- for link1 in link0.links -%}
+            <li class="mb-4">
+              <a href="{{ link1.url }}">{{ link1.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
   {%- endfor -%}
 </div>
 {% schema %}
@@ -23,12 +25,6 @@
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
       "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Quick links",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
-        },
         {
           "type": "link_list",
           "id": "menu",

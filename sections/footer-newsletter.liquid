@@ -1,1 +1,59 @@
-<div class="w-1/4 float-right">FOOTER NEWS</div>
+<div class="w-1/3 float-right">
+  <div class="font-bodoni text-2xl mb-2">Inscription à la newsletter J.-B. Clair</div>
+  <p class="leading-tight  mb-4">
+    Inscrivez-vous pour connaître les nouveautés et offres exclusives J.-B. Clair. J.-B. Clair utilisera vos données
+    personnelles, comme précisé sur notre page <a class="underline" href="#">Données personnelles et cookies</a>.
+  </p>
+  {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    <label class="block w-full" for="NewsletterForm--{{ section.id }}">Saisissez votre email:</label>
+    <div class="flex align-center gap-2">
+      <input
+        id="NewsletterForm--{{ section.id }}"
+        class="w-72 p-2 bg-transparent border border-white text-white"
+        type="email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        aria-required="true"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="email"
+        {% if form.errors %}
+          autofocus
+          aria-invalid="true"
+          aria-describedby="ContactFooter-error"
+        {% elsif form.posted_successfully? %}
+          aria-describedby="ContactFooter-success"
+        {% endif %}
+        placeholder="{{ 'newsletter.label' | t }}"
+        required
+      >
+      <button
+        type="submit"
+        class="px-6 py-3 bg-stone-700 uppercase font-josefin text-xs w-fit text-white border border-white"
+      >
+        S'abonner
+      </button>
+    </div>
+
+    {%- if form.errors -%}
+      <small class="newsletter-form__message form__message" id="ContactFooter-error">
+        {%- render 'icon-error' -%}
+        {{- form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email -}}
+      </small>
+    {%- endif -%}
+    {%- if form.posted_successfully? -%}
+      <h3
+        class="newsletter-form__message newsletter-form__message--success form__message"
+        id="ContactFooter-success"
+        tabindex="-1"
+        autofocus
+      >
+        {% render 'icon-success' -%}
+        {{- 'newsletter.success' | t }}
+      </h3>
+    {%- endif -%}
+  {%- endform -%}
+</div>

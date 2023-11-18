@@ -38,10 +38,14 @@
     {% sections 'top-group' %}
     {% section 'menu' %}
     {{ content_for_layout }}
-    <div class="bg-stone-900 text-white relative mt-20 pt-10 _clearfix">
+    <div class="bg-stone-700 text-white relative mt-36 pt-14 p-10 _clearfix">
       <div class="_contained">
         {% sections 'footer-group' %}
       </div>
+    </div>
+    <div class="p-8 uppercase text-sm bg-stone-700 text-white">
+      <p>L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
+      <p>©2023 J.-B. Clair - Tous droits réservés</p>
     </div>
     {% render 'alpine-scripts' %}
   </body>
