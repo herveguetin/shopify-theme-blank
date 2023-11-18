@@ -1,8 +1,5 @@
 {
   "sections": {
-    "top-hero": {
-      "type": "hero"
-    },
     "banners": {
       "type": "banners",
       "blocks": {
@@ -39,7 +36,6 @@
     }
   },
   "order": [
-    "top-hero",
     "banners",
     "featured"
   ]

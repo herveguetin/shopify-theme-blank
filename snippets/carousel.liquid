@@ -13,7 +13,14 @@
         assign descriptionArray = item.description | split: '.'
       -%}
       <div class="swiper-slide bg-white border border-stone-200">
-        <img src="{{ item.featured_image | image_url }}" alt="" style="mix-blend-mode: hard-light;">
+        <img
+          src="{{ item.featured_image | image_url }}"
+          width="285"
+          height="370"
+          loading="lazy"
+          alt=""
+          style="mix-blend-mode: hard-light;"
+        >
         <div class="p-6 bg-stone-100">
           <div class="font-bodoni text-lg mb-4">{{ item.title }}</div>
           <div>{{ descriptionArray[0] }}</div>

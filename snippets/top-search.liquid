@@ -1,28 +1,36 @@
-<div class="text-white">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1"
-    stroke="currentColor"
-    class="w-6 h-6"
-  >
-    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-  </svg>
-</div>
-
-<div x-data="topSearch" x-show="false">
-  <input type="text" placeholder="Your search" x-model="q" x-on:input.change.debounce="query()">
-  <div x-show="products.length === 0 && canShowNoResults">No result found</div>
-  <div x-show="products.length > 0">
-    <ul>
-      <template x-for="product in products">
-        <li>
-          <a :href="product.url"><span x-text="product.title"></span></a>
-        </li>
-      </template>
-    </ul>
+<div x-data="topSearch">
+  <div class="text-white cursor-pointer" @click="isOpen = true">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
   </div>
+  <template x-teleport="body">
+    <aside class="_aside bg-stone-300 transition-transform" :class="isOpen ? 'transform-none' : 'translate-x-full'">
+      <div>
+        <div @click="isOpen = false">CLOSE</div>
+        <div>
+          <input type="text" placeholder="Your search" x-model="q" x-on:input.change.debounce="query()">
+          <div x-show="products.length === 0 && canShowNoResults">No result found</div>
+          <div x-show="products.length > 0">
+            <ul>
+              <template x-for="product in products">
+                <li>
+                  <a :href="product.url"><span x-text="product.title"></span></a>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </template>
 </div>
 
 <script>
@@ -31,6 +39,7 @@
       const MIN_QUERY_LENGTH = 3;
 
       return {
+        isOpen: false,
         q: '',
         results: {},
         canShowNoResults: false,

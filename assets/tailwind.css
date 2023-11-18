@@ -7,14 +7,17 @@
 @font-face {
     font-family: "Josefin";
     src: url("./JosefinSans-Medium.ttf") format("TrueType");
+    font-display: swap;
   }
   @font-face {
     font-family: "JosefinLight";
     src: url("./JosefinSans-Light.ttf") format("TrueType");
+    font-display: swap;
   }
   @font-face {
     font-family: "Bodoni";
     src: url("./Bodoni_72.ttc") format("TrueType");
+    font-display: swap;
   }
 
   /** Layout */
@@ -22,6 +25,14 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  ._aside {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100vh;
   }
 
   /** Utilities */
@@ -49,4 +60,9 @@
   }
   .swiper-button-disabled {
     display: none;
+  }
+
+  /** Templates */
+  .template-index {
+    background: url('./hero.jpg') top center no-repeat;
   }
