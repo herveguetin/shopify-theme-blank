@@ -1,4 +1,13 @@
 <script>
+  window.formatPrice = function (price) {
+    return parseFloat(price).toLocaleString('{{ shop.locale }}', {
+      style: 'currency',
+      currency: '{{ shop.currency }}',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   document.addEventListener('alpine:init', () => {
     // Components
     Alpine.data('addToCart', (usedProduct = {}) => {

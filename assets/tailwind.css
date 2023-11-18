@@ -28,11 +28,12 @@
   }
 
   ._aside {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
-    width: 30%;
+    width: 35%;
     height: 100vh;
+    z-index: 100;
   }
 
   /** Utilities */
