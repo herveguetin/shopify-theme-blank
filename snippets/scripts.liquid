@@ -1,0 +1,155 @@
+<script>
+  // Utilities
+  window.formatPrice = function (price) {
+    return parseFloat(price).toLocaleString('{{ shop.locale }}', {
+      style: 'currency',
+      currency: '{{ shop.currency }}',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  document.addEventListener('alpine:init', () => {
+    // Components
+    Alpine.data('addToCart', (usedProduct = {}) => {
+      return {
+        product: usedProduct,
+        isLoading: false,
+        addProductToCart() {
+          this.isLoading = true;
+          fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              items: [
+                {
+                  id: this.product.variants[0].id,
+                  quantity: 1,
+                },
+              ],
+            }),
+          })
+            .then((response) => response.json())
+            .then((itemLines) => {
+              this.isLoading = false;
+              const addedItem = itemLines.items[0];
+              this.$store.cart.addItemLine(addedItem);
+              this.$dispatch('cart-item-added', { item: addedItem });
+            });
+        },
+      };
+    });
+
+    Alpine.data('miniCart', () => {
+      return {
+        isOpen: false,
+        get products() {
+          return this.$store.cart.itemLines;
+        },
+        get total() {
+          const initialValue = 0;
+          return (
+            this.products.reduce((accumulator, product) => accumulator + product.final_line_price, initialValue) / 100
+          );
+        },
+        remove(product) {
+          const variantId = product.variant_id;
+          const update = {};
+          update[variantId] = 0;
+          fetch(window.Shopify.routes.root + 'cart/update.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              updates: update,
+            }),
+          })
+            .then((response) => response.json())
+            .then((itemLines) => {
+              this.$store.cart.removeItemLine(product);
+            });
+        },
+      };
+    });
+
+    Alpine.data('topSearch', () => {
+      const MIN_QUERY_LENGTH = 3;
+
+      return {
+        isOpen: false,
+        q: '',
+        results: {},
+        canShowNoResults: false,
+        get products() {
+          return this.results.resources ? this.results.resources.results.products : [];
+        },
+        open() {
+          this.reset();
+          this.isOpen = true;
+        },
+        reset() {
+          this.q = '';
+          this.results = {};
+          this.canShowNoResults = false;
+        },
+        query() {
+          if (this.q.length > MIN_QUERY_LENGTH) {
+            this.canShowNoResults = false;
+            fetch(window.Shopify.routes.root + 'search/suggest.json?q=' + this.q)
+              .then((response) => response.json())
+              .then((suggestions) => {
+                this.results = suggestions;
+                this.canShowNoResults = true;
+              });
+          }
+        },
+      };
+    });
+
+    Alpine.data('carousel', () => {
+      return {
+        init() {
+          new Swiper(this.$el, {
+            navigation: {
+              nextEl: this.$refs.btn_next,
+              prevEl: this.$refs.btn_prev,
+            },
+            slidesPerView: 4,
+            spaceBetween: 20,
+          });
+        },
+      };
+    });
+
+    // Stores
+    Alpine.store('cart', {
+      itemLines: Alpine.$persist([]).as('cart_lines'),
+      init() {
+        fetch(window.Shopify.routes.root + 'cart.js')
+          .then((response) => response.json())
+          .then((cart) => {
+            this.itemLines = cart.items;
+          });
+      },
+      addItemLine(newItemLine) {
+        // Update current lines in order to avoid changing order of items
+        let lines = this.itemLines.map((itemLine) => (itemLine.id === newItemLine.id ? newItemLine : itemLine));
+
+        // Add new item if not exist
+        const newItemAlreadyInCart = lines.find((itemLine) => itemLine.id === newItemLine.id);
+        if (newItemAlreadyInCart === undefined) {
+          lines.push(newItemLine);
+        }
+
+        this.itemLines = lines;
+      },
+      removeItemLine(removedItemLine) {
+        const newItemLines = this.itemLines.filter((itemLine) => itemLine.variant_id !== removedItemLine.variant_id);
+        this.itemLines = newItemLines;
+      },
+    });
+  });
+</script>

@@ -13,7 +13,7 @@
   </div>
   <template x-teleport="body">
     <aside
-      class="_aside bg-stone-300 transition-transform p-10"
+      class="_aside bg-stone-300"
       :class="isOpen ? 'transform-none' : 'translate-x-full'"
     >
       <div class="h-full overflow-hidden">
@@ -50,7 +50,7 @@
                         <div x-text="product.title" class="font-bodoni"></div>
                         <div x-text="product.type"></div>
                       </div>
-                      <div class="ml-auto mr-0 w-16 pr-10 text-right self-center font-bodoni text-xl">
+                      <div class="ml-auto mr-0 w-16 text-right self-center font-bodoni text-xl text-right">
                         <span x-text="window.formatPrice(product.price)"></span>
                       </div>
                     </div>
@@ -64,41 +64,3 @@
     </aside>
   </template>
 </div>
-
-<script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('topSearch', () => {
-      const MIN_QUERY_LENGTH = 3;
-
-      return {
-        isOpen: false,
-        q: '',
-        results: {},
-        canShowNoResults: false,
-        get products() {
-          return this.results.resources ? this.results.resources.results.products : [];
-        },
-        open() {
-          this.reset();
-          this.isOpen = true;
-        },
-        reset() {
-          this.q = '';
-          this.results = {};
-          this.canShowNoResults = false;
-        },
-        query() {
-          if (this.q.length > MIN_QUERY_LENGTH) {
-            this.canShowNoResults = false;
-            fetch(window.Shopify.routes.root + 'search/suggest.json?q=' + this.q)
-              .then((response) => response.json())
-              .then((suggestions) => {
-                this.results = suggestions;
-                this.canShowNoResults = true;
-              });
-          }
-        },
-      };
-    });
-  });
-</script>

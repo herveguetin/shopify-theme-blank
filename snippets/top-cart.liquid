@@ -1,27 +1,95 @@
-<div class="text-white">
-  <svg
-    fill="currentColor"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="24px"
-    height="24px"
-    viewBox="0 0 390.707 390.707"
-  >
-    <g>
+<div x-data="miniCart">
+  <div class="text-white cursor-pointer" @click="isOpen = true">
+    <svg
+      fill="currentColor"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="24px"
+      height="24px"
+      viewBox="0 0 390.707 390.707"
+    >
       <g>
-        <path d="M188.853,271.375v46.716h-17.181c-3.585,0-6.501,2.917-6.501,6.503c0,3.584,2.917,6.5,6.501,6.5h47.364
-          c3.586,0,6.502-2.916,6.502-6.5c0-3.586-2.918-6.503-6.502-6.503h-17.18v-46.72c12.486-1.586,24.439-7.625,33.704-17.038
-          c11.813-12.005,18.321-28.603,18.321-46.733c0-3.586-2.917-6.502-6.501-6.502H143.33c-3.585,0-6.501,2.916-6.501,6.502
-          c0,18.147,6.482,34.744,18.252,46.729C164.333,263.75,176.311,269.792,188.853,271.375z M240.535,214.1
-          c-3.002,27.983-25.248,44.684-45.182,44.684c-19.758,0-42.215-15.655-45.195-44.684H240.535z"/>
-        <path d="M357.334,153.441v-0.036c0-0.82,0-2.346-24.871-145.062l-0.039-0.206C331.45,3.422,327.251,0,322.435,0H68.304
-          c-4.815,0-9.016,3.422-9.99,8.144L58.274,8.35C42.623,98.165,34.533,145.193,33.546,152.095c-0.128,0.648-0.193,1.315-0.193,1.981
-          v226.43c0,5.625,4.576,10.201,10.201,10.201h303.598c5.625,0,10.201-4.576,10.201-10.201v-226.43
-          C357.354,153.862,357.347,153.651,357.334,153.441z M202.354,13.999h116.885c8.428,48.373,18.575,106.928,22.455,129.876h-139.34
-          V13.999z M71.5,13.999h116.854v129.876H49.045C52.922,120.943,63.071,62.384,71.5,13.999z M343.354,376.707h-296v-218.83h296
-          V376.707z"/>
+        <g>
+          <path d="M188.853,271.375v46.716h-17.181c-3.585,0-6.501,2.917-6.501,6.503c0,3.584,2.917,6.5,6.501,6.5h47.364
+            c3.586,0,6.502-2.916,6.502-6.5c0-3.586-2.918-6.503-6.502-6.503h-17.18v-46.72c12.486-1.586,24.439-7.625,33.704-17.038
+            c11.813-12.005,18.321-28.603,18.321-46.733c0-3.586-2.917-6.502-6.501-6.502H143.33c-3.585,0-6.501,2.916-6.501,6.502
+            c0,18.147,6.482,34.744,18.252,46.729C164.333,263.75,176.311,269.792,188.853,271.375z M240.535,214.1
+            c-3.002,27.983-25.248,44.684-45.182,44.684c-19.758,0-42.215-15.655-45.195-44.684H240.535z"/>
+          <path d="M357.334,153.441v-0.036c0-0.82,0-2.346-24.871-145.062l-0.039-0.206C331.45,3.422,327.251,0,322.435,0H68.304
+            c-4.815,0-9.016,3.422-9.99,8.144L58.274,8.35C42.623,98.165,34.533,145.193,33.546,152.095c-0.128,0.648-0.193,1.315-0.193,1.981
+            v226.43c0,5.625,4.576,10.201,10.201,10.201h303.598c5.625,0,10.201-4.576,10.201-10.201v-226.43
+            C357.354,153.862,357.347,153.651,357.334,153.441z M202.354,13.999h116.885c8.428,48.373,18.575,106.928,22.455,129.876h-139.34
+            V13.999z M71.5,13.999h116.854v129.876H49.045C52.922,120.943,63.071,62.384,71.5,13.999z M343.354,376.707h-296v-218.83h296
+            V376.707z"/>
+        </g>
       </g>
-    </g>
-  </svg>
+    </svg>
+  </div>
+
+  <template x-teleport="body">
+    <aside
+      class="_aside bg-white"
+      @cart-item-added.window="isOpen = true"
+      :class="isOpen ? 'transform-none' : 'translate-x-full'"
+    >
+      <div class="h-full overflow-hidden">
+        <div @click="isOpen = false" class="flex justify-end">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-10 h-10 cursor-pointer"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div class="mt-10 h-full">
+          <div class="mb-6 font-bodoni text-2xl">Panier</div>
+          <div x-show="products.length === 0">Votre panier est vide</div>
+          <div x-show="products.length > 0" class="overflow-y-scroll h-full pb-40">
+            <ul class="mt-2">
+              <template x-for="product in products">
+                <li>
+                  <div class="w-full flex bg-white py-4 mb-2">
+                    <div class="ml-0 w-1/4 min-h-full self-center">
+                      <img :src="product.image" class="" :alt="product.title">
+                    </div>
+                    <div class="w-full pl-2">
+                      <div x-text="product.title" class="font-bodoni"></div>
+                      <div>Quantité : <span x-text="product.quantity"></span></div>
+                      <div @click="remove(product)" class="flex items-center mt-1 cursor-pointer">
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            class="w-4 h-4"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                          </svg>
+                        </div>
+                        <div class="text-xs ml-1">Supprimer</div>
+                      </div>
+                    </div>
+                    <div class="ml-auto mr-0 w-16 text-right self-center font-bodoni text-xl text-right">
+                      <span x-text="window.formatPrice(product.final_line_price / 100)"></span>
+                    </div>
+                  </div>
+                </li>
+              </template>
+            </ul>
+            <div class="flex items-center border-t border-stone-700 font-bodoni text-xl">
+              <div class="w-full pr-4 text-right">Total</div>
+              <div class="ml-auto mr-0 w-16 text-right text-right">
+                <span x-text="window.formatPrice(total)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </template>
 </div>
