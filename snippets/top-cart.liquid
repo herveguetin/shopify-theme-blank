@@ -1,5 +1,11 @@
 <div x-data="miniCart">
-  <div class="text-white cursor-pointer" @click="isOpen = true">
+  <div class="text-white cursor-pointer relative" @click="isOpen = true">
+    <div
+      x-show="itemsCount > 0"
+      class="absolute -top-2 -right-2 flex items-center w-4 h-4 justify-center rounded-full bg-white text-stone-700"
+    >
+      <div x-text="itemsCount" class="text-xs"></div>
+    </div>
     <svg
       fill="currentColor"
       version="1.1"
@@ -29,7 +35,7 @@
 
   <template x-teleport="body">
     <aside
-      class="_aside bg-white"
+      class="_aside"
       @cart-item-added.window="isOpen = true"
       :class="isOpen ? 'transform-none' : 'translate-x-full'"
     >

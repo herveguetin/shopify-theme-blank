@@ -49,10 +49,10 @@
           return this.$store.cart.itemLines;
         },
         get total() {
-          const initialValue = 0;
-          return (
-            this.products.reduce((accumulator, product) => accumulator + product.final_line_price, initialValue) / 100
-          );
+          return this.products.reduce((accumulator, product) => accumulator + product.final_line_price, 0) / 100;
+        },
+        get itemsCount() {
+          return this.products.reduce((accumulator, product) => accumulator + product.quantity, 0);
         },
         remove(product) {
           const variantId = product.variant_id;
