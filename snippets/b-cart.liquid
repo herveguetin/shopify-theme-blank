@@ -1,4 +1,4 @@
-<div x-data="addToCart({{ product | json | escape }})">
+<div x-data="addToCart({{ product | json | escape }}, {{ box_config | json | escape }})">
   <div x-show="!isLoading" @click="addProductToCart" class="cursor-pointer">
     <svg
       fill="currentColor"

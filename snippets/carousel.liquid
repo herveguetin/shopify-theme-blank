@@ -26,7 +26,10 @@
           <div>{{ descriptionArray[0] }}</div>
           <div class="flex items-center mt-6 justify-between">
             <div class="font-bodoni text-xl">{{ item.price | money }}</div>
-            <div class="border rounded-full border-stone-700 w-fit p-2">{% render 'b-cart', product: item %}</div>
+            <div class="border rounded-full border-stone-700 w-fit p-2">
+              {% render 'b-cart', product: item, box_config: item.metafields.custom.box.value %}
+            </div>
+            <div>{{ item.metafields.custom.box.value | json }}</div>
           </div>
         </div>
       </div>

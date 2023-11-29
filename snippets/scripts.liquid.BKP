@@ -135,20 +135,8 @@
         fetch(window.Shopify.routes.root + 'cart.js')
           .then((response) => response.json())
           .then((cart) => {
-            fetch('/apps/second-app/cart/', {
-              method: 'POST',
-              headers: {
-                'ngrok-skip-browser-warning': 'true',
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(cart),
-            })
-              .then((cartResponse) => cartResponse.json())
-              .then((cartObject) => {
-                console.log(cartObject);
-                this.cart = cartObject;
-                this.itemLines = cartObject.items;
-              });
+            this.cart = cart;
+            this.itemLines = cart.items;
           });
       },
       removeItemLine(removedItemLine) {
