@@ -30,6 +30,7 @@
                   quantity: 1,
                   properties: {
                     _box: JSON.stringify(this.boxConfig),
+                    _timestamp: this.$store.cart.timestamp(this.product),
                   },
                 },
               ],
@@ -145,7 +146,6 @@
             })
               .then((cartResponse) => cartResponse.json())
               .then((cartObject) => {
-                console.log(cartObject);
                 this.cart = cartObject;
                 this.itemLines = cartObject.items;
               });
@@ -154,6 +154,12 @@
       removeItemLine(removedItemLine) {
         const newItemLines = this.itemLines.filter((itemLine) => itemLine.variant_id !== removedItemLine.variant_id);
         this.itemLines = newItemLines;
+      },
+      timestamp(product) {
+        const existingLine = this.itemLines.find((line) => {
+          return line.id === product.variants[0].id;
+        });
+        return existingLine !== undefined ? existingLine.properties._timestamp : Date.now();
       },
     });
   });
