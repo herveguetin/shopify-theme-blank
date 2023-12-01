@@ -64,7 +64,7 @@
                     </div>
                     <div class="w-full pl-2">
                       <div x-text="product.title" class="font-bodoni"></div>
-                      <div>Quantité : <span x-text="product.quantity"></span></div>
+                      <div><span x-text="quantityLabel(product)"></span></div>
                       <div @click="remove(product)" class="flex items-center mt-1 cursor-pointer">
                         <div>
                           <svg
@@ -81,7 +81,12 @@
                       </div>
                     </div>
                     <div class="ml-auto mr-0 w-16 text-right self-center font-bodoni text-xl text-right">
-                      <span x-text="window.formatPrice(product.final_line_price / 100)"></span>
+                      <div
+                        x-show="product.final_line_price < product.original_line_price"
+                        x-text="window.formatPrice(product.original_line_price / 100)"
+                        class="line-through text-sm"
+                      ></div>
+                      <div x-text="window.formatPrice(product.final_line_price / 100)"></div>
                     </div>
                   </div>
                 </li>
