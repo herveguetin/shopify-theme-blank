@@ -23,9 +23,6 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -47,7 +44,7 @@
       <p>L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
       <p>©2023 J.-B. Clair - Tous droits réservés</p>
     </div>
+    {% render 'app-config' %}
     <script src="{{ 'app.js' | asset_url }}"></script>
-    {% render 'scripts' %}
   </body>
 </html>
