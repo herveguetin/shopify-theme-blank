@@ -1,9 +1,9 @@
 export default {
+    // output only app.js as a Shopify asset
     build: {
       outDir: '../assets',
       assetsDir: './',
       rollupOptions: {
-        // overwrite default .html entry
         input: './app.js',
         output: {
             entryFileNames: 'app.js',
