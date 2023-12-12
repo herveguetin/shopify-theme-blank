@@ -198,8 +198,7 @@
           });
       },
       removeItemLine(removedItemLine) {
-        const newItemLines = this.itemLines.filter((itemLine) => itemLine.variant_id !== removedItemLine.variant_id);
-        this.itemLines = newItemLines;
+        this.itemLines = this.itemLines.filter((itemLine) => itemLine.variant_id !== removedItemLine.variant_id);
       },
       timestamp(product) {
         const existingLine = this.itemLines.find((line) => {
