@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@alpinejs/persist": "^3.13.3",
-    "alpinejs": "^3.13.3"
+    "algoliasearch": "^4.21.1",
+    "alpinejs": "^3.13.3",
+    "instantsearch.js": "^4.62.0"
   }
 }

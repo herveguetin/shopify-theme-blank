@@ -1,1 +1,37 @@
-<div x-data="collection({{ collection.id }})">{{ collection.id }}</div>
+<div x-data="collection()">
+    <template x-for="facet in facets">
+        <div>
+            <div x-text="facet.label"></div>
+            <template x-for="value in facet.values">
+                <div x-text="value" @click="toggleFacetValue(facet, value)"></div>
+            </template>
+        </div>
+        <div x-text="product.title"></div>
+    </template>
+    <template x-for="product in products">
+        <div x-text="product.title"></div>
+    </template>
+</div>
+<script>
+  window.shopifyCollectionConfig = {
+    filters: [
+      {
+        attribute: 'collections',
+        value: '{{ collection.id }}'
+      }
+    ],
+    facets: [
+      {
+        attribute: 'has_boxes',
+        label: 'Vendu aussi en caisses'
+      },
+
+        {%- for filter in collection.filters -%}
+      {
+        attribute: '{{ filter.param_name | replace: "filter.p.", "" }}',
+        label: '{{ filter.label }}'
+      }
+        {%- endfor -%}
+    ]
+  };
+</script>
